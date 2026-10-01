@@ -23,5 +23,5 @@ if "articles" not in data:
     print("API error:", data)
     exit(1)
 
-for article in data["articles"][:10\]:
+for article in data["articles"][:10]:
     print(article.get("title", "No title"))
