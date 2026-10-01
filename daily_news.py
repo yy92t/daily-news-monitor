@@ -4,12 +4,11 @@ import json
 
 API_KEY = os.getenv("NEWS_API_KEY")
 
-print("API Key exists:", API_KEY is not None)
-
-url = "https://newsapi.org/v2/top-headlines"
+if not API_KEY:
+    raise ValueError("NEWS_API_KEY is not set")
 
 response = requests.get(
-    url,
+    "https://newsapi.org/v2/top-headlines",
     params={
         "country": "hk",
         "apiKey": API_KEY
@@ -18,11 +17,10 @@ response = requests.get(
 
 data = response.json()
 
-print("API Response:")
 print(json.dumps(data, indent=2))
 
 if "articles" not in data:
-    print("ERROR: 'articles' field not found")
+    print("API error:", data)
     exit(1)
 
 for article in data["articles"][:10\]:
